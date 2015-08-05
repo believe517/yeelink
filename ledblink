@@ -1,0 +1,23 @@
+#!/bin/bssh
+# /etc/init.d/ledblink
+
+### BEGIN INIT INFO
+# Provides: shang shuai
+# Description: This service is used to manage a led
+
+case "$1" in
+    start)
+        echo "Starting LED Blink"
+        /home/pi/Desktop/Document/mail.py &
+        ;;
+    stop)
+        echo "Stopping LED Blink"
+        #kill all ledblink.py
+        kill $(ps aux | grep -m 1 'python /home/pi/Desktop/Document/mail.py' | awk '{ print $2  }' )
+        ;;
+    *)
+        echo "Usage: service ledblink start|stop"
+        exit 1
+        ;;
+esac
+exit 0
